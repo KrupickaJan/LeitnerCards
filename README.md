@@ -1,6 +1,6 @@
-# Leitner Cards Web App Backend
+# Leitner Cards
 
-Welcome to the Leitner Cards Web App backend, a personal project created for study purposes. This project is built using Java Spring Boot and employs the Leitner system to help users efficiently memorize information through spaced repetition.
+Welcome to the Leitner Cards, a personal project created for study purposes. This project is built using Java Spring Boot and employs the Leitner system to help users efficiently memorize information through spaced repetition.
 
 ## Overview
 
@@ -12,7 +12,7 @@ The Leitner system organizes flashcards into multiple levels or boxes. Correctly
 - CRUD operations for flashcards
 - Spaced repetition algorithm based on the Leitner system
 - RESTful APIs for frontend integration
-- MySQL database integration
+- PostgreSQL database integration
 
 ## Technologies Used
 
@@ -22,7 +22,7 @@ The Leitner system organizes flashcards into multiple levels or boxes. Correctly
 - Spring Security
 - Spring Web
 - Spring Validation
-- MySQL
+- PostgreSQL
 - Lombok
 - JSON Web Tokens (JWT)
 
