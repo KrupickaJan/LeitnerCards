@@ -30,18 +30,14 @@ The Leitner system organizes flashcards into multiple levels or boxes. Correctly
 
 - Java 21 or higher
 - Maven
-- MySQL
+- PostgreSQL
 
 ### Demo:
 
-
+https://leitnercards.onrender.com/
 
 Default Login
 To log in to the default account, use the following credentials:
 
 - Email: default@palette.com
 - Password: Abcd1234.
-- Project Structure
-src/main/java: Contains the main application code.
-src/main/resources: Contains configuration files.
-src/test/java: Contains test cases.CardsBackend
