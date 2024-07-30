@@ -36,12 +36,18 @@ function PackCreate() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Create new pack</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
+    <div className="container w-25 text-center">
+      <h2 className="m-3">Create new pack</h2>
+      <form
+        className="bg-dark text-start text-light p-3"
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-2">
+          <label className="form-label" id="name">
+            Name:
+          </label>
           <input
+            className="form-control"
             type="text"
             name="name"
             value={formData.name}
@@ -49,7 +55,9 @@ function PackCreate() {
             required
           />
         </div>
-        <button type="submit">Create</button>
+        <button type="submit" className="mt-4 btn btn-light w-100">
+          Create
+        </button>
       </form>
     </div>
   );

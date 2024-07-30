@@ -34,12 +34,18 @@ function PackUpdate() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Update pack</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
+    <div className="container w-25 text-center">
+      <h2 className="m-3">Update pack</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-dark text-start text-light p-3"
+      >
+        <div className="mb-2">
+          <label className="form-label" id="name">
+            Name:
+          </label>
           <input
+            className="form-control"
             type="text"
             name="name"
             value={formData.name}
@@ -47,7 +53,9 @@ function PackUpdate() {
             required
           />
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" className="mt-4 btn btn-light w-100">
+          Update
+        </button>
       </form>
     </div>
   );
