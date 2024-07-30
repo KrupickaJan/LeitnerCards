@@ -33,11 +33,16 @@ function TopicUpdate() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Update topic</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
+    <div className="container w-25 text-center">
+      <h2 className="m-3">Update topic</h2>
+      <form
+        className="bg-dark text-start text-light p-3"
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-2">
+          <label className="form-label" id="name">
+            Name:
+          </label>
           <input
             className="form-control"
             type="text"
@@ -46,8 +51,10 @@ function TopicUpdate() {
             onChange={handleInputChange}
             required
           />
+          <button type="submit" className="mt-4 btn btn-light w-100">
+            Update
+          </button>
         </div>
-        <button type="submit">Update</button>
       </form>
     </div>
   );

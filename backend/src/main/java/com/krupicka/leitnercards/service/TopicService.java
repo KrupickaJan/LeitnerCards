@@ -1,5 +1,10 @@
 package com.krupicka.leitnercards.service;
 
+import com.krupicka.leitnercards.dto.PackDto;
+import com.krupicka.leitnercards.dto.TopicDto;
+import com.krupicka.leitnercards.entity.PackEntity;
+import com.krupicka.leitnercards.mapper.PackMapper;
+import com.krupicka.leitnercards.repository.PackRepository;
 import com.krupicka.leitnercards.viewModel.TopicViewModel;
 import com.krupicka.leitnercards.entity.TopicEntity;
 import com.krupicka.leitnercards.entity.UserEntity;
@@ -29,7 +34,11 @@ public class TopicService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private PackRepository packRepository;
+    @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private PackMapper packMapper;
 
     @Transactional
     public TopicViewModel createTopic(TopicViewModel topicCreateRequest) {
@@ -76,9 +85,12 @@ public class TopicService {
                                 Objects.equals(topic
                                         .getUser()
                                         .getId(), userId)).toList();
-                usersTopicEntities.forEach(topicEntity -> getUsersTopicsResponse
-                        .getTopicsList()
-                        .add(topicMapper.topicEntityToDto(topicEntity)));
+                usersTopicEntities.forEach(topicEntity -> {
+                    TopicDto topicDto = topicMapper.topicEntityToDto(topicEntity);
+                    topicDto.setPacksList(getTopicPacks(topicEntity.getId()));
+                    getUsersTopicsResponse.getTopicsList()
+                            .add(topicDto);
+                });
                 getUsersTopicsResponse.setStatusCode(200);
                 getUsersTopicsResponse.setMessage("Successful");
             }
@@ -140,5 +152,23 @@ public class TopicService {
             updateTopicResponse.setMessage("Error occurred while updating topic: " + e.getMessage());
         }
         return updateTopicResponse;
+    }
+
+    private List<PackDto> getTopicPacks(Integer topicId){
+        List<PackDto> listOfPacks = new ArrayList<>();
+        Optional<TopicEntity> topicOptional = topicRepository.findById(topicId);
+        if(topicOptional.isPresent()){
+            List<PackEntity> packEntities = packRepository
+                    .findAll()
+                    .stream()
+                    .filter(pack ->
+                            Objects.equals(pack
+                                    .getTopic()
+                                    .getId(), topicId))
+                    .toList();
+            packEntities.forEach(packEntity ->
+                    listOfPacks.add(packMapper.packEntityToDto(packEntity)));
+        }
+        return listOfPacks;
     }
 }

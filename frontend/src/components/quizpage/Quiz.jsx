@@ -67,14 +67,6 @@ function QuestionFirstQuiz() {
 
   const handleFinish = async () => {
     cards.map(async (card, index) => {
-      // if (
-      //   card.cardValue + cardValueArr[index] > 0 &&
-      //   card.cardValue + cardValueArr[index] < 6
-      // ) {
-      //   card.cardValue = card.cardValue + cardValueArr[index];
-      //   const token = localStorage.getItem("token");
-      //   await CardService.updateCard(card.id, card, token);
-      // }
       if (cardValueArr[index] > 0) {
         card.cardValue = card.cardValue + 1;
         const token = localStorage.getItem("token");
@@ -122,12 +114,12 @@ function QuestionFirstQuiz() {
             ×
           </button>
           <div onClick={showAnswer} className="text-card-container">
-            <div className="container-heigh-50">
+            <div className="QACOntainer">
               <p className="m-auto">
                 <strong>{isQquestionFirst ? question : answer}</strong>
               </p>
             </div>
-            <div className="container-heigh-50 ">
+            <div className="QACOntainer ">
               <p className={`m-auto answer ${show ? "m-auto visible" : ""}`}>
                 {isQquestionFirst ? answer : question}
               </p>

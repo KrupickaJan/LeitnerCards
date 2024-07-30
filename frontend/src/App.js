@@ -64,10 +64,8 @@ function App() {
       <BrowserRouter>
         <div className="App">
           <Navbar />
-          <div className="content">
+          <div className='content'>
             <AppRoutes />
-            <div >
-            </div>
           </div>
           <FooterComponent />
         </div>

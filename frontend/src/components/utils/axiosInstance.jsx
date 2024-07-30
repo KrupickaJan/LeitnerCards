@@ -7,8 +7,8 @@ const setAccessToken = (token) => localStorage.setItem("token", token);
 const getRefreshToken = () => localStorage.getItem("refreshtoken");
 
 const axiosInstance = axios.create({
-  baseURL: "https://leitnercardsapi.onrender.com/",
-  // baseURL: "http://localhost:8080/",
+  // baseURL: "https://leitnercardsapi.onrender.com/",
+  baseURL: "http://localhost:8080/",
   headers: {
     "Content-Type": "application/json",
   },

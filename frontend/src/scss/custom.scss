@@ -1,0 +1,58 @@
+$primary: #4074a7;
+$secondary: #94a1bd;
+$success: #5a6c57;
+$info: #5c5757;
+$warning: #cca272;
+$danger: #ac4328;
+$light: #ececec;
+$dark: #181f2c;
+
+$body-bg: $light;
+$body-bg-dark: $dark;
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+* {
+  margin: 0;
+  border-radius: 0px !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.foot {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $dark;
+  color: $light;
+}
+
+.content {
+  min-height: calc(100vh - 107px);
+  padding: 1rem;
+}
+
+:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+:active {
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: inherit;
+  color: white;
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed):hover {
+  background-color: var(--bs-btn-hover-bg);
+}

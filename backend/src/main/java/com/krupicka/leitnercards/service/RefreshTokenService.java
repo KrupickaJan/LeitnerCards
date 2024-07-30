@@ -15,7 +15,7 @@ import java.util.UUID;
 @Service
 public class RefreshTokenService {
 
-    private static final long EXPIRATION_TIME = 3600 * 1000; //1 hour
+    private static final long EXPIRATION_TIME = 24 * 3600 * 1000; //24 hours
 
     @Autowired
     RefreshTokenRepository refreshTokenRepository;

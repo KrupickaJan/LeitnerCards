@@ -53,8 +53,8 @@ function UpdateProfile() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Update Profile</h2>
+    <div className="container w-25 text-center">
+      <h2 className="m-3">Update Profile</h2>
       {error && (
         <>
           {error.split("\n").map((msg, index) => (
@@ -64,10 +64,16 @@ function UpdateProfile() {
           ))}
         </>
       )}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-dark text-start text-light p-3"
+      >
+        <div className="mb-2">
+          <label className="form-label" id="name">
+            Name:
+          </label>
           <input
+            className="form-control"
             type="text"
             name="name"
             value={userData.name}
@@ -75,9 +81,10 @@ function UpdateProfile() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Email:</label>
+        <div className="mb-2">
+          <label className="form-label">Email:</label>
           <input
+            className="form-control"
             type="email"
             name="email"
             value={userData.email}
@@ -85,7 +92,9 @@ function UpdateProfile() {
             required
           />
         </div>
-        <button type="submit">Update</button>
+        <button className="mt-4 mb-1 btn btn-light w-100" type="submit">
+          Update
+        </button>
       </form>
     </div>
   );

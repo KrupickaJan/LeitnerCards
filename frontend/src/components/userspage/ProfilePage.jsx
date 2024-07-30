@@ -20,17 +20,17 @@ function ProfilePage() {
   };
 
   return (
-    <div className="profile-page-container">
-      <h2>Profile Information</h2>
-      <div className="text-align-start ">
-        <p>Name: {profileInfo.name}</p>
-        <p>Email: {profileInfo.email}</p>
-      </div>
-      <button>
-        <Link to={`/update-profile`} className="color-dark">
-          Update This Profile
+    <div className="container w-25 text-center">
+      <h2 className="m-3">Profile Information</h2>
+      <div className="bg-dark text-start text-light p-3">
+        <div className="text-align-start ">
+          <p>Name: {profileInfo.name}</p>
+          <p>Email: {profileInfo.email}</p>
+        </div>
+        <Link to={`/update-profile`} className="btn btn-light w-100">
+          Update this profile
         </Link>
-      </button>
+      </div>
     </div>
   );
 }

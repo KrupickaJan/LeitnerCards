@@ -2,6 +2,7 @@ package com.krupicka.leitnercards.viewModel;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.krupicka.leitnercards.dto.PackDto;
 import com.krupicka.leitnercards.dto.TopicDto;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
