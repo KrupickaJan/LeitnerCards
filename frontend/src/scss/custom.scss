@@ -7,7 +7,7 @@ $danger: #ac4328;
 $light: #ececec;
 $dark: #181f2c;
 
-$body-bg: $light;
+$body-bg: white;
 $body-bg-dark: $dark;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
@@ -55,4 +55,11 @@ a {
 
 .accordion-button:not(.collapsed):hover {
   background-color: var(--bs-btn-hover-bg);
+}
+
+.welcomeGif {
+  max-width: 60vw;
+  max-height: 23vh;
+  margin-top: 3rem;
+  aspect-ratio: 2 / 1;
 }

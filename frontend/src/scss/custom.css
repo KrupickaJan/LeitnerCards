@@ -80,8 +80,8 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
   --bs-body-color-rgb: 33, 37, 41;
-  --bs-body-bg: #ececec;
-  --bs-body-bg-rgb: 236, 236, 236;
+  --bs-body-bg: white;
+  --bs-body-bg-rgb: 255, 255, 255;
   --bs-emphasis-color: #000;
   --bs-emphasis-color-rgb: 0, 0, 0;
   --bs-secondary-color: rgba(33, 37, 41, 0.75);
@@ -2471,10 +2471,10 @@ textarea.form-control-lg {
   outline: 0;
 }
 .form-range:focus::-webkit-slider-thumb {
-  box-shadow: 0 0 0 1px #ececec, 0 0 0 0.25rem rgba(64, 116, 167, 0.25);
+  box-shadow: 0 0 0 1px white, 0 0 0 0.25rem rgba(64, 116, 167, 0.25);
 }
 .form-range:focus::-moz-range-thumb {
-  box-shadow: 0 0 0 1px #ececec, 0 0 0 0.25rem rgba(64, 116, 167, 0.25);
+  box-shadow: 0 0 0 1px white, 0 0 0 0.25rem rgba(64, 116, 167, 0.25);
 }
 .form-range::-moz-focus-outer {
   border: 0;
@@ -12008,4 +12008,11 @@ a {
 
 .accordion-button:not(.collapsed):hover {
   background-color: var(--bs-btn-hover-bg);
+}
+
+.welcomeGif {
+  max-width: 60vw;
+  max-height: 23vh;
+  margin-top: 3rem;
+  aspect-ratio: 2/1;
 }/*# sourceMappingURL=custom.css.map */

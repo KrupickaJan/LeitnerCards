@@ -1,7 +1,7 @@
 function Home() {
   return (
-    <div className="welcom-container">
-      <h1>Welcome</h1>
+    <div className="container text-center w-50">
+      <h1 className="m-3">Welcome</h1>
 
       <h5>
         <br />
