@@ -53,21 +53,27 @@ function RegistrationPage() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Registration</h2>
+    <div className="container container-form text-center">
+      <h2 className="m-3">Registration</h2>
       {error && (
         <>
           {error.split("\n").map((msg, index) => (
-            <p className="error-message" key={index}>
+            <p className="text-danger" key={index}>
               {msg}
             </p>
           ))}
         </>
       )}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-dark text-start text-light p-3"
+      >
+        <div className="mb-2">
+          <label className="form-label" id="name">
+            Name:
+          </label>
           <input
+            className="form-control"
             type="text"
             name="name"
             value={formData.name}
@@ -75,9 +81,10 @@ function RegistrationPage() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Email:</label>
+        <div className="mb-2">
+          <label className="form-label">Email:</label>
           <input
+            className="form-control"
             type="email"
             name="email"
             value={formData.email}
@@ -85,9 +92,10 @@ function RegistrationPage() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Password:</label>
+        <div className="mb-2">
+          <label className="form-label">Password:</label>
           <input
+            className="form-control"
             type="password"
             name="password"
             value={formData.password}
@@ -95,7 +103,9 @@ function RegistrationPage() {
             required
           />
         </div>
-        <button type="submit">Register</button>
+        <button className="mt-4 mb-1 btn btn-light w-100" type="submit">
+          Register
+        </button>
       </form>
     </div>
   );

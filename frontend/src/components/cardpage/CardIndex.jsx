@@ -40,7 +40,7 @@ function CardIndex() {
   };
 
   return (
-    <div className="container-sm text-center">
+    <div className="container-sm  text-center">
       <h2 className="m-3">{packName}</h2>
       <div className="table table-info">
         <div className="w-100">

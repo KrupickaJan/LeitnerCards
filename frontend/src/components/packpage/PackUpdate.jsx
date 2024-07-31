@@ -34,7 +34,7 @@ function PackUpdate() {
   };
 
   return (
-    <div className="container w-25 text-center">
+    <div className="container container-form text-center">
       <h2 className="m-3">Update pack</h2>
       <form
         onSubmit={handleSubmit}

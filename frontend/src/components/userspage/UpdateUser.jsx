@@ -55,7 +55,7 @@ function UpdateUser() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="container-form">
       <h2>Update User</h2>
       {error && (
         <>

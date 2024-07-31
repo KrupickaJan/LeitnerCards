@@ -33,7 +33,7 @@ function TopicUpdate() {
   };
 
   return (
-    <div className="container w-25 text-center">
+    <div className="container container-form text-center">
       <h2 className="m-3">Update topic</h2>
       <form
         className="bg-dark text-start text-light p-3"

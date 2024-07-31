@@ -66,7 +66,7 @@ function SetQuiz() {
   };
 
   return (
-    <div className="auth-container">
+    <div className="container-form">
       <h2>Set your quiz</h2>
 
       <div className="form-group">

@@ -20,7 +20,7 @@ function ProfilePage() {
   };
 
   return (
-    <div className="container w-25 text-center">
+    <div className="container-sm container-form max-w text-center">
       <h2 className="m-3">Profile Information</h2>
       <div className="bg-dark text-start text-light p-3">
         <div className="text-align-start ">

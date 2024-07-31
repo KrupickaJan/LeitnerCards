@@ -89,10 +89,14 @@ function Navbar() {
             {!isAuthenticated && (
               <>
                 <li className="nav-item">
-                  <Link to="/login">Login</Link>
+                  <Link className="nav-link active" to="/login">
+                    Login
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <Link to="/register">Register</Link>
+                  <Link className="nav-link active" to="/register">
+                    Register
+                  </Link>
                 </li>
               </>
             )}

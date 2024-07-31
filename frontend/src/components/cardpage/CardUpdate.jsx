@@ -34,48 +34,51 @@ function CardUpdate() {
   };
 
   return (
-    <div className="user-container">
-      <div className="auth-container">
-        <h2>update new card</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Question:</label>
-            <input
-              type="text"
-              name="question"
-              value={formData.question}
-              onChange={handleInputChange}
-              required
-            />
-            <label>Answer:</label>
-            <input
-              type="text"
-              name="answer"
-              value={formData.answer}
-              onChange={handleInputChange}
-              required
-            />
-            <label>Box:</label>
-            <input
-              type="number"
-              name="cardValue"
-              value={formData.cardValue}
-              min="1"
-              max="5"
-              onChange={handleInputChange}
-              required
-            />
-          </div>
-          <button type="submit" className="update-button">
-            Update
-          </button>
-        </form>
-        {/* <button>
-          <Link to="/user/card/index" state={{ id: packId, name: packName }}>
-            Back to {packName}
-          </Link>
-        </button> */}
-      </div>
+    <div className="container container-form text-center">
+      <h2 className="m-3">update new card</h2>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-dark text-start text-light p-3"
+      >
+        <div className="mb-2">
+          <label className="form-label">Question:</label>
+          <input
+            className="form-control"
+            type="text"
+            name="question"
+            value={formData.question}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="mb-2">
+          <label className="form-label">Answer:</label>
+          <input
+            className="form-control"
+            type="text"
+            name="answer"
+            value={formData.answer}
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <div className="mb-2">
+          <label className="form-label">Box:</label>
+          <input
+            className="form-control"
+            type="number"
+            name="cardValue"
+            value={formData.cardValue}
+            min="1"
+            max="5"
+            onChange={handleInputChange}
+            required
+          />
+        </div>
+        <button className="mt-4 mb-1 btn btn-light w-100" type="submit">
+          Update
+        </button>
+      </form>
     </div>
   );
 }

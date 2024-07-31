@@ -1,6 +1,6 @@
 function Home() {
   return (
-    <div className="container text-center w-50">
+    <div className="container text-center">
       <h1 className="m-3">Welcome</h1>
 
       <h5>

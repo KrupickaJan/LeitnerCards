@@ -38,29 +38,38 @@ function LoginPage() {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Login</h2>
+    <div className="container container-form text-center">
+      <h2 className="m-3">Login</h2>
       {error && <p className="error-message">{error}</p>}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email: </label>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-dark text-start text-light p-3"
+      >
+        <div className="mb-2">
+          <label className="form-label" id="name">
+            Email:{" "}
+          </label>
           <input
+            className="form-control"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
-        <div className="form-group">
-          <label>Password: </label>
+        <div className="mb-2">
+          <label className="form-label">Password: </label>
           <input
+            className="form-control"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button className="mt-4 mb-1 btn btn-light w-100" type="submit">
+          Login
+        </button>
       </form>
     </div>
   );
