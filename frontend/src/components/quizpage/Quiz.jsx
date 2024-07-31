@@ -2,6 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import CardService from "../service/CardService";
 import PackService from "../service/PackService";
+import * as Icon from "react-bootstrap-icons";
 
 function QuestionFirstQuiz() {
   const navigate = useNavigate();
@@ -103,64 +104,66 @@ function QuestionFirstQuiz() {
   }, [fetchCards]);
 
   return (
-    <div className="user-container">
-      <h2>Quiz</h2>
+    <div className="container container-card text-center p-0">
+      <h2 className="m-3">Quiz</h2>
       {!isEnd ? (
-        <div className="card-container">
-          <button
-            onClick={handleWrongAnswer}
-            className="arrowbtn arrowbtn-left button-red"
-          >
-            ×
-          </button>
-          <div onClick={showAnswer} className="text-card-container">
-            <div className="QACOntainer">
+        <div className="d-flex h-100 w-100">
+          <div className="w-10 p-0">
+            <button
+              onClick={handleWrongAnswer}
+              className="w-100 p-0 h-100 btn color-danger border border-0"
+            >
+              <Icon.X size={55} />
+            </button>
+          </div>
+          <div onClick={showAnswer} className="w-100 p-0">
+            <div className="w-100 h-50 align-content-center">
               <p className="m-auto">
                 <strong>{isQquestionFirst ? question : answer}</strong>
               </p>
             </div>
-            <div className="QACOntainer ">
-              <p className={`m-auto answer ${show ? "m-auto visible" : ""}`}>
+            <div className="w-100 h-50 align-content-center">
+              <p className={`m-auto ${show ? "" : "invisible"}`}>
                 {isQquestionFirst ? answer : question}
               </p>
             </div>
           </div>
-          <button
-            onClick={handleRightAnswer}
-            className="arrowbtn arrowbtn-right"
-          >
-            ✓
-          </button>
+          <div className="w-10 p-0">
+            <button
+              onClick={handleRightAnswer}
+              className="w-100 p-0 h-100 btn color-success border border-0"
+            >
+              <Icon.Check2 size={50} />
+            </button>
+          </div>
         </div>
       ) : (
-        <div className="card-container">
-          <div className="text-card-container">
-            <div className="container-heigh-50">
-              <p className="m-auto">
-                <strong>End of quiz</strong>
-              </p>
-              <br />
-              <p>right answers: {rightAnswersCount}</p>
-              <p>wrong answers: {wrongAnswersCount}</p>
-            </div>
+        <div className="h-100 align-content-center">
+          <div className="container-heigh-50">
+            <p className="m-auto">
+              <strong>End of quiz</strong>
+            </p>
+            <br />
+            <p>right answers: {rightAnswersCount}</p>
+            <p>wrong answers: {wrongAnswersCount}</p>
           </div>
         </div>
       )}
 
-      <div className="button-card-container">
-        <button onClick={back} className="arrowbtn arrowbtn-left">
+      <div className="">
+        <button onClick={back} className="btn btn-dark">
           &#11207;
         </button>
         {!isEnd ? (
-          <button onClick={showAnswer} className="button-show">
+          <button onClick={showAnswer} className="btn btn-dark">
             Show
           </button>
         ) : (
-          <button onClick={handleFinish} className="background-red button-show">
+          <button onClick={handleFinish} className="btn btn-danger">
             Finish
           </button>
         )}
-        <button onClick={next} className="arrowbtn arrowbtn-right">
+        <button onClick={next} className="btn btn-dark">
           &#11208;
         </button>
       </div>

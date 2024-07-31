@@ -8,6 +8,7 @@ function CardUpdate() {
   const prevQuestion = useLocation().state.question;
   const prevAnswer = useLocation().state.answer;
   const prevCardValue = useLocation().state.cardValue;
+  const packName = useLocation().state.packName;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -26,7 +27,7 @@ function CardUpdate() {
     try {
       await CardService.updateCard(cardId, formData);
       alert("Card updated successfully");
-      navigate("/user/card/index", { state: { id: packId } });
+      navigate("/user/card/index", { state: { id: packId, name: packName } });
     } catch (error) {
       console.error("Error updating card:", error);
       alert("An error occurred while updating card");
@@ -35,14 +36,14 @@ function CardUpdate() {
 
   return (
     <div className="container container-form text-center">
-      <h2 className="m-3">update new card</h2>
+      <h2 className="m-3">Update card</h2>
       <form
         onSubmit={handleSubmit}
         className="bg-dark text-start text-light p-3"
       >
         <div className="mb-2">
           <label className="form-label">Question:</label>
-          <input
+          <textarea
             className="form-control"
             type="text"
             name="question"
@@ -53,7 +54,7 @@ function CardUpdate() {
         </div>
         <div className="mb-2">
           <label className="form-label">Answer:</label>
-          <input
+          <textarea
             className="form-control"
             type="text"
             name="answer"

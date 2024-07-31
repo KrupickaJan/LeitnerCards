@@ -11987,7 +11987,7 @@ a {
 
 .content {
   min-height: calc(100vh - 107px);
-  padding: 1rem;
+  padding: 0.25rem;
 }
 
 :focus {
@@ -12019,4 +12019,27 @@ a {
 
 .container-form {
   max-width: 500px;
+}
+
+.container-card {
+  max-width: 500px;
+  height: 60vh;
+}
+
+.color-danger {
+  color: #ac4328;
+}
+
+.color-danger:hover {
+  color: #ac4328;
+  opacity: 0.8;
+}
+
+.color-success {
+  color: #5a6c57;
+}
+
+.color-success:hover {
+  color: #5a6c57;
+  opacity: 0.8;
 }/*# sourceMappingURL=custom.css.map */

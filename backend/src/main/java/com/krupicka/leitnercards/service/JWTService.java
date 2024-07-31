@@ -18,7 +18,7 @@ import java.util.function.Function;
 @Component
 public class JWTService {
     private SecretKey key;
-    private static final long EXPIRATION_TIME = 5 * 1000; //900s = 15 minutes
+    private static final long EXPIRATION_TIME = 15 * 1000;
 
     @Value("${security.jwt.secret-key}")
     private String secretKey;

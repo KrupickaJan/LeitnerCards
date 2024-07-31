@@ -34,7 +34,7 @@ a {
 
 .content {
   min-height: calc(100vh - 107px);
-  padding: 1rem;
+  padding: 0.25rem;
 }
 
 :focus {
@@ -66,4 +66,28 @@ a {
 
 .container-form {
   max-width: 500px;
+}
+
+.container-card {
+  max-width: 500px;
+  height: 60vh;
+  // height: 50vh;
+}
+
+.color-danger {
+  color: $danger;
+}
+
+.color-danger:hover {
+  color: $danger;
+  opacity: 0.8;
+}
+
+.color-success {
+  color: $success;
+}
+
+.color-success:hover {
+  color: $success;
+  opacity: 0.8;
 }

@@ -42,7 +42,7 @@ function CardIndex() {
   return (
     <div className="container-sm  text-center">
       <h2 className="m-3">{packName}</h2>
-      <div className="table table-info">
+      <div className="bg-light">
         <div className="w-100">
           <div>
             <div colSpan={4} className="p-0 border-0">
@@ -64,11 +64,11 @@ function CardIndex() {
         <div>
           {cards.map((card) => (
             <React.Fragment key={card.id}>
-              <div className="w-100 d-flex flex-row">
+              <div className="w-100 d-flex flex-row border border-1 border-start-0 border-end-0 border-white">
                 <div className="p-0">
                   <div className="h-100">
                     <button
-                      className="btn btn-dark border-1 border-light border-top-0 h-100"
+                      className="btn btn-dark border-1 border-light border-top-0 border-bottom-0 h-100"
                       type="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
@@ -94,6 +94,7 @@ function CardIndex() {
                             question: card.question,
                             answer: card.answer,
                             cardValue: card.cardValue,
+                            packName: packName,
                           }}
                         >
                           Update
@@ -102,13 +103,15 @@ function CardIndex() {
                     </ul>
                   </div>
                 </div>
-                <div className="text-start w-100">
+                <div className="text-start w-100 px-3 py-1">
                   <strong>Question:</strong> {card.question}
                   <br />
                   <strong>Answer: </strong>
                   {card.answer}
                 </div>
-                <div className="p-4">{card.cardValue}</div>
+                <div className="px-4 align-content-center">
+                  {card.cardValue}
+                </div>
               </div>
             </React.Fragment>
           ))}

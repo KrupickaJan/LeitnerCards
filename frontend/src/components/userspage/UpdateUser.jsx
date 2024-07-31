@@ -55,8 +55,8 @@ function UpdateUser() {
   };
 
   return (
-    <div className="container-form">
-      <h2>Update User</h2>
+    <div className="container container-form text-center">
+      <h2 className="m-3">Update User</h2>
       {error && (
         <>
           {error.split("\n").map((msg, index) => (
@@ -66,10 +66,14 @@ function UpdateUser() {
           ))}
         </>
       )}
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Name:</label>
+      <form
+        onSubmit={handleSubmit}
+        className="bg-dark text-start text-light p-3"
+      >
+        <div className="mb-2">
+          <label className="form-label">Name:</label>
           <input
+            className="form-control"
             type="text"
             name="name"
             value={userData.name}
@@ -77,9 +81,10 @@ function UpdateUser() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Email:</label>
+        <div className="mb-2">
+          <label className="form-label">Email:</label>
           <input
+            className="form-control"
             type="email"
             name="email"
             value={userData.email}
@@ -87,14 +92,20 @@ function UpdateUser() {
             required
           />
         </div>
-        <div className="form-group">
-          <label>Role:</label>
-          <select name="role" onChange={handleInputChange}>
+        <div className="mb-2">
+          <label className="form-label">Role:</label>
+          <select
+            className="form-select"
+            name="role"
+            onChange={handleInputChange}
+          >
             <option>USER</option>
             <option>ADMIN</option>
           </select>
         </div>
-        <button type="submit">Update</button>
+        <button type="submit" className="mt-4 btn btn-light w-100">
+          Update
+        </button>
       </form>
     </div>
   );

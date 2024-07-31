@@ -2,7 +2,6 @@ function Home() {
   return (
     <div className="container text-center">
       <h1 className="m-3">Welcome</h1>
-
       <h5>
         <br />
         This is my personal project that I created for study purposes.
