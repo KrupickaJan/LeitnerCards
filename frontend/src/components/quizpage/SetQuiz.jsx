@@ -1,69 +1,47 @@
-import { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
-import TopicService from "../service/TopicService";
-import PackService from "../service/PackService";
+import { useEffect, useState, useCallback } from "react"
+import { Link } from "react-router-dom"
+import TopicService from "../service/TopicService"
 
 function SetQuiz() {
-  const [topics, setTopics] = useState([]);
-  const [packs, setPacks] = useState([]);
-  const [topicId, setTopicId] = useState(null);
-  const [selectedPacks, setSelectedPacks] = useState([]);
-  const [isQuestionFirst, setIsQuestionFirst] = useState(true);
+  const [topics, setTopics] = useState([])
+  const [packs, setPacks] = useState([])
+  const [selectedPacks, setSelectedPacks] = useState([])
+  const [isQuestionFirst, setIsQuestionFirst] = useState(true)
 
   const fetchTopics = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await TopicService.getUsersTopics(token);
-      const topicsList = response.topicsList;
-      setTopics(topicsList);
-
-      if (topicsList.length > 0) {
-        const initialTopicId = topicsList[0].id;
-        setTopicId(initialTopicId);
-      }
+      const token = localStorage.getItem("token")
+      const response = await TopicService.getUsersTopics(token)
+      const topicsList = response.topicsList
+      setTopics(topicsList)
+      setPacks(topicsList[0].packsList)
     } catch (error) {
-      console.error("Error fetching topics:", error);
+      console.error("Error fetching topics:", error)
     }
-  }, []);
-
-  const fetchPacks = useCallback(async () => {
-    try {
-      const token = localStorage.getItem("token");
-      const response = await PackService.getPacks(topicId, token);
-      setPacks(response.packsList);
-      setSelectedPacks([]); // Reset selected packs when fetching new packs
-    } catch (error) {
-      console.error("Error fetching packs:", error);
-    }
-  }, [topicId]);
+  }, [])
 
   useEffect(() => {
-    fetchTopics();
-  }, [fetchTopics]);
-
-  useEffect(() => {
-    if (topicId) {
-      fetchPacks();
-    }
-  }, [topicId, fetchPacks]);
+    fetchTopics()
+  }, [fetchTopics])
 
   const handleTopicChange = (event) => {
-    const selectedTopicId = event.target.value;
-    setTopicId(selectedTopicId);
-  };
+    const selectedTopicId = Number(event.target.value)
+    const selectedTopic = topics.find((item) => item.id === selectedTopicId)
+    setPacks(selectedTopic.packsList)
+  }
 
   const handleQuizTypeChange = (event) => {
-    setIsQuestionFirst(event.target.value === "true");
-  };
+    setIsQuestionFirst(event.target.value === "true")
+  }
 
   const handlePackChange = (event) => {
-    const { value, checked } = event.target;
+    const { value, checked } = event.target
     setSelectedPacks((prevSelectedPacks) =>
       checked
         ? [...prevSelectedPacks, value]
         : prevSelectedPacks.filter((packId) => packId !== value)
-    );
-  };
+    )
+  }
 
   return (
     <div className="container container-form text-center">
@@ -126,7 +104,7 @@ function SetQuiz() {
         </button>
       </div>
     </div>
-  );
+  )
 }
 
-export default SetQuiz;
+export default SetQuiz
