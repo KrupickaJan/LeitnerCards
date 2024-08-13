@@ -1,78 +1,63 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import TopicService from "../service/TopicService";
-import PackService from "../service/PackService";
-import * as Icon from "react-bootstrap-icons";
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import TopicService from "../service/TopicService"
+import PackService from "../service/PackService"
+import * as Icon from "react-bootstrap-icons"
 
 function TopicIndex() {
-  const [topics, setTopics] = useState([]);
-  const [unrolledTopicId, setUnrolledTopicId] = useState(null);
-  const [unrolledPacks, setUnrolledPacks] = useState([]);
+  const [topics, setTopics] = useState([])
 
   useEffect(() => {
-    fetchTopics();
-  }, []);
+    fetchTopics()
+  }, [])
 
   const fetchTopics = async () => {
     try {
-      const response = await TopicService.getUsersTopics();
-      console.log("Fetched topics:", response.topicsList);
-      setTopics(response.topicsList);
+      const response = await TopicService.getUsersTopics()
+      console.log("Fetched topics:", response.topicsList)
+      setTopics(response.topicsList)
     } catch (error) {
-      console.error("Error fetching topics:", error);
+      console.error("Error fetching topics:", error)
     }
-  };
-
-  const fetchPacks = async (topicId) => {
-    try {
-      setUnrolledPacks([]);
-      const response = await PackService.getPacks(topicId);
-      console.log("Fetched packs for topic:", topicId, response.packsList);
-      setUnrolledPacks(response.packsList);
-    } catch (error) {
-      console.error("Error fetching packs:", error);
-    }
-  };
+  }
 
   const deleteTopic = async (topicId) => {
     try {
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this topic?"
-      );
+      )
       if (confirmDelete) {
-        await TopicService.deleteTopic(topicId);
-        // fetchTopics();
-        setTopics((list) => list.filter((topic) => topic.id != topicId));
+        await TopicService.deleteTopic(topicId)
+        setTopics((list) => list.filter((topic) => topic.id !== topicId))
       }
     } catch (error) {
-      console.error("Error deleting topic:", error);
+      console.error("Error deleting topic:", error)
     }
-  };
+  }
 
-  const deletePack = async (packId) => {
+  const deletePack = async (packId, topicId) => {
     try {
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this pack?"
-      );
+      )
       if (confirmDelete) {
-        await PackService.deletePack(packId);
-        fetchPacks(unrolledTopicId);
+        await PackService.deletePack(packId)
+        setTopics((list) =>
+          list.map((topic) => {
+            if (topic.id === topicId) {
+              return {
+                ...topic,
+                packsList: topic.packsList.filter((pack) => pack.id !== packId),
+              }
+            }
+            return topic
+          })
+        )
       }
     } catch (error) {
-      console.error("Error deleting pack:", error);
+      console.error("Error deleting pack:", error)
     }
-  };
-
-  const handleUnroll = async (topicId) => {
-    console.log("Unroll button clicked for topic:", topicId);
-    if (unrolledTopicId === topicId) {
-      setUnrolledTopicId(null);
-      setUnrolledPacks([]);
-    } else {
-      setUnrolledTopicId(topicId);
-      await fetchPacks(topicId);
-    }
-  };
+  }
 
   return (
     <div className="container text-center">
@@ -158,7 +143,7 @@ function TopicIndex() {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 function SubTable({ packs, deletePack, topicId }) {
@@ -195,7 +180,7 @@ function SubTable({ packs, deletePack, topicId }) {
               <li className="m-0 d-block">
                 <Link
                   className="dropdown-item"
-                  onClick={() => deletePack(pack.id)}
+                  onClick={() => deletePack(pack.id, topicId)}
                 >
                   Delete
                 </Link>
@@ -222,6 +207,6 @@ function SubTable({ packs, deletePack, topicId }) {
         </div>
       ))}
     </div>
-  );
+  )
 }
-export default TopicIndex;
+export default TopicIndex
