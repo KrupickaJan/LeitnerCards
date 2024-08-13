@@ -1,7 +1,6 @@
-# Use a node base image
-FROM node:20-alpine
+# Stage 1: Build the React app
+FROM node:20-alpine as build
 
-# Set the working directory
 WORKDIR /app
 
 # Copy package.json and package-lock.json
@@ -13,14 +12,20 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the React app for production
+# Build the React app
 RUN npm run build
 
-# Expose port 3000
-EXPOSE 3000
+# Stage 2: Serve the React app
+FROM nginx:alpine
 
-# Set the environment variable to bind to all network interfaces
-ENV HOST 0.0.0.0
+# Copy the build output to Nginx's html directory
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Command to start the app
-CMD ["npm", "start"]
+# Copy custom nginx configuration
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Expose port 3000 to the outside world
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]

@@ -60,7 +60,7 @@ const refreshRequest = async () => {
 const isTokenExpired = (token) => {
   try {
     const { exp } = jwtDecode(token);
-    return Date.now() >= (exp - 2) * 1000;
+    return Date.now() >= (exp - 5) * 1000;
   } catch (e) {
     console.log(e);
     return true;

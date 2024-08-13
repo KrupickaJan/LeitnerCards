@@ -80,6 +80,7 @@ function CardIndex() {
                         <Link
                           className="dropdown-item"
                           onClick={() => deleteCard(card.id)}
+                          state={{ id: packId, name: packName }}
                         >
                           Delete
                         </Link>
