@@ -11,6 +11,15 @@ class CardService {
         }
     }
 
+    static async getCard(cardId) {
+        try {
+            const response = await axiosInstance.get(`/user/card/getCard/${cardId}`);
+            return response.data;
+        } catch (err) {
+            throw err;
+        }
+    }
+
     static async getCards(packId) {
         try {
             const response = await axiosInstance.get(`/user/card/getCards/${packId}`);

@@ -1,36 +1,35 @@
-import React, { useState } from "react";
-import TopicService from "../service/TopicService";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react"
+import TopicService from "../service/TopicService"
+import { useNavigate, useParams } from "react-router-dom"
 
 function TopicUpdate() {
-  const topicId = useLocation().state.id;
-  const topicName = useLocation().state.topicName;
-  const navigate = useNavigate();
+  const { topicName, topicId } = useParams()
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     name: topicName,
-  });
+  })
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await TopicService.updateTopic(topicId, formData);
+      await TopicService.updateTopic(topicId, formData)
 
       setFormData({
         name: "",
-      });
-      alert("Topic updated successfully");
-      navigate("/user/topic");
+      })
+      alert("Topic updated successfully")
+      navigate("/user/topic")
     } catch (error) {
-      console.error("Error updating topic:", error);
-      alert("An error occurred while updating topic");
+      console.error("Error updating topic:", error)
+      alert("An error occurred while updating topic")
     }
-  };
+  }
 
   return (
     <div className="container container-form text-center">
@@ -57,7 +56,7 @@ function TopicUpdate() {
         </div>
       </form>
     </div>
-  );
+  )
 }
 
-export default TopicUpdate;
+export default TopicUpdate

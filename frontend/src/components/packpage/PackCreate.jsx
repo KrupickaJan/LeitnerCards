@@ -1,39 +1,37 @@
-import React, { useState } from "react";
-import PackService from "../service/PackService";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react"
+import PackService from "../service/PackService"
+import { useNavigate, useParams } from "react-router-dom"
 
 function PackCreate() {
-  const navigate = useNavigate();
-  const topicId = useLocation().state.id;
+  const navigate = useNavigate()
+  const { topicId } = useParams()
 
   const [formData, setFormData] = useState({
     name: "",
     topic: {
       id: topicId,
     },
-  });
+  })
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const token = localStorage.getItem("token");
-      await PackService.create(formData, token);
-
+      await PackService.create(formData)
       setFormData({
         name: "",
-      });
-      alert("Pack created successfully");
-      navigate("/user/topic");
+      })
+      alert("Pack created successfully")
+      navigate("/user/topic")
     } catch (error) {
-      console.error("Error creating pack:", error);
-      alert("An error occurred while creating pack");
+      console.error("Error creating pack:", error)
+      alert("An error occurred while creating pack")
     }
-  };
+  }
 
   return (
     <div className="container container-form text-center">
@@ -60,7 +58,7 @@ function PackCreate() {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default PackCreate;
+export default PackCreate

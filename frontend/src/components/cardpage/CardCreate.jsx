@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import CardService from "../service/CardService";
-import { useLocation, Link } from "react-router-dom";
+import React, { useState } from "react"
+import CardService from "../service/CardService"
+import { Link, useParams } from "react-router-dom"
 
 function CardCreate() {
-  const packId = useLocation().state.id;
-  const packName = useLocation().state.name;
+  const { packName, packId } = useParams()
 
   const [formData, setFormData] = useState({
     question: "",
@@ -13,17 +12,17 @@ function CardCreate() {
     pack: {
       id: packId,
     },
-  });
+  })
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await CardService.create(formData);
+      await CardService.create(formData)
 
       setFormData({
         question: "",
@@ -32,13 +31,13 @@ function CardCreate() {
         pack: {
           id: packId,
         },
-      });
-      alert("Card created successfully");
+      })
+      alert("Card created successfully")
     } catch (error) {
-      console.error("Error creating card:", error);
-      alert("An error occurred while creating card");
+      console.error("Error creating card:", error)
+      alert("An error occurred while creating card")
     }
-  };
+  }
 
   return (
     <div className="container container-form text-center">
@@ -76,15 +75,14 @@ function CardCreate() {
         </form>
 
         <Link
-          to="/user/card/index"
-          state={{ id: packId, name: packName }}
+          to={`/user/card/index/${packName}/${packId}`}
           className="mt-4 btn btn-dark w-100"
         >
           Back to {packName}
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-export default CardCreate;
+export default CardCreate

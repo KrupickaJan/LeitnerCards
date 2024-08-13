@@ -98,8 +98,7 @@ function TopicIndex() {
                 <li className="m-0 d-block">
                   <Link
                     className="dropdown-item py-2"
-                    to="/user/topic/update"
-                    state={{ id: topic.id, topicName: topic.name }}
+                    to={`/user/topic/update/${topic.name}/${topic.id}`}
                   >
                     Update
                   </Link>
@@ -107,8 +106,7 @@ function TopicIndex() {
                 <li className="m-0 d-block">
                   <Link
                     className="dropdown-item py-2"
-                    to="/user/pack/create"
-                    state={{ id: topic.id }}
+                    to={`/user/pack/create/${topic.id}`}
                   >
                     Add pack
                   </Link>
@@ -151,11 +149,7 @@ function SubTable({ packs, deletePack, topicId }) {
     <div>
       <div>
         <button className="btn btn-light border p-0 w-100">
-          <Link
-            className="dropdown-item"
-            to="/user/pack/create"
-            state={{ id: topicId }}
-          >
+          <Link className="dropdown-item" to={`/user/pack/create/${topicId}`}>
             <div className="border p-0 d-flex flex-row border-0">
               <div className="px-2 align-content-center">
                 <Icon.Plus className="mx-1" size={35} />
@@ -188,8 +182,7 @@ function SubTable({ packs, deletePack, topicId }) {
               <li className="m-0 d-block">
                 <Link
                   className="dropdown-item py-2"
-                  to="/user/pack/update"
-                  state={{ id: pack.id, packName: pack.name }}
+                  to={`/user/pack/update/${pack.name}/${pack.id}`}
                 >
                   Update
                 </Link>
@@ -199,8 +192,7 @@ function SubTable({ packs, deletePack, topicId }) {
 
           <Link
             className="btn btn-light w-100 text-start py-3"
-            to="/user/card/index"
-            state={{ id: pack.id, name: pack.name }}
+            to={`/user/card/index/${pack.name}/${pack.id}`}
           >
             {pack.name}
           </Link>

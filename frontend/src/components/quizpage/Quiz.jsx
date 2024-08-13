@@ -70,17 +70,14 @@ function QuestionFirstQuiz() {
     cards.map(async (card, index) => {
       if (cardValueArr[index] > 0) {
         card.cardValue = card.cardValue + 1
-        const token = localStorage.getItem("token")
-        await CardService.updateCard(card.id, card, token)
+        await CardService.updateCard(card.id, card)
       } else if (cardValueArr[index] < 0) {
         card.cardValue = 1
-        const token = localStorage.getItem("token")
-        await CardService.updateCard(card.id, card, token)
+        await CardService.updateCard(card.id, card)
       }
     })
     packIds.map(async (packId) => {
-      const token = localStorage.getItem("token")
-      await PackService.updateSession(packId, token)
+      await PackService.updateSession(packId)
     })
     console.log(cards)
     navigate("/user/quiz/set")
@@ -88,8 +85,7 @@ function QuestionFirstQuiz() {
 
   const fetchCards = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token")
-      const response = await CardService.getCardsFromPacks(packIds, token)
+      const response = await CardService.getCardsFromPacks(packIds)
       console.log("Fetched cards for pack:", packIds, response.cards)
       setCards(response.cards)
       setQuestion(response.cards[0].question)

@@ -10,8 +10,7 @@ function SetQuiz() {
 
   const fetchTopics = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token")
-      const response = await TopicService.getUsersTopics(token)
+      const response = await TopicService.getUsersTopics()
       const topicsList = response.topicsList
       setTopics(topicsList)
       setPacks(topicsList[0].packsList)

@@ -1,40 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import UserService from "../service/UserService";
-import * as Icon from "react-bootstrap-icons";
+import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
+import UserService from "../service/UserService"
+import * as Icon from "react-bootstrap-icons"
 
 function UserManagementPage() {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    fetchUsers()
+  }, [])
 
   const fetchUsers = async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await UserService.getAllUsers(token);
-      setUsers(response.usersList);
+      const response = await UserService.getAllUsers()
+      setUsers(response.usersList)
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching users:", error)
     }
-  };
+  }
 
   const deleteUser = async (userId) => {
     try {
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this user?"
-      );
-
-      const token = localStorage.getItem("token");
+      )
       if (confirmDelete) {
-        await UserService.deleteUser(userId, token);
-        fetchUsers();
+        await UserService.deleteUser(userId)
+        fetchUsers()
       }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error("Error deleting user:", error)
     }
-  };
+  }
 
   return (
     <div className="container">
@@ -80,7 +77,7 @@ function UserManagementPage() {
         </table>
       </div>
     </div>
-  );
+  )
 }
 
-export default UserManagementPage;
+export default UserManagementPage

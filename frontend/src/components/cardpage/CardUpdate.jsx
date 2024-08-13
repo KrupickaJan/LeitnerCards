@@ -1,38 +1,61 @@
-import React, { useState } from "react";
-import CardService from "../service/CardService";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useCallback } from "react"
+import CardService from "../service/CardService"
+import { useNavigate, useParams } from "react-router-dom"
 
 function CardUpdate() {
-  const cardId = useLocation().state.cardId;
-  const packId = useLocation().state.packId;
-  const prevQuestion = useLocation().state.question;
-  const prevAnswer = useLocation().state.answer;
-  const prevCardValue = useLocation().state.cardValue;
-  const packName = useLocation().state.packName;
-  const navigate = useNavigate();
+  const { cardId } = useParams()
+  const [packId, setPackId] = useState()
+  const [prevQuestion, setPrevQuestion] = useState()
+  const [prevAnswer, setPrevAnswer] = useState()
+  const [prevCardValue, setPrevCardValue] = useState()
+  const [packName, setPackName] = useState()
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState({
     question: prevQuestion,
     answer: prevAnswer,
     cardValue: prevCardValue,
-  });
+  })
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      await CardService.updateCard(cardId, formData);
-      alert("Card updated successfully");
-      navigate("/user/card/index", { state: { id: packId, name: packName } });
+      await CardService.updateCard(cardId, formData)
+      alert("Card updated successfully")
+      navigate(`/user/card/index/${packName}/${packId}`)
     } catch (error) {
-      console.error("Error updating card:", error);
-      alert("An error occurred while updating card");
+      console.error("Error updating card:", error)
+      alert("An error occurred while updating card")
     }
-  };
+  }
+
+  const fetchCard = useCallback(async () => {
+    try {
+      const response = await CardService.getCard(cardId)
+      setPackId(response.cardDto.pack.id)
+      setPrevQuestion(response.cardDto.question)
+      setPrevAnswer(response.cardDto.answer)
+      setPrevCardValue(response.cardDto.cardValue)
+      setPackName(response.cardDto.pack.name)
+
+      setFormData({
+        question: response.cardDto.question,
+        answer: response.cardDto.answer,
+        cardValue: response.cardDto.cardValue,
+      })
+    } catch (error) {
+      console.error("Error fetching card:", error)
+    }
+  }, [cardId])
+
+  useEffect(() => {
+    fetchCard()
+  }, [fetchCard])
 
   return (
     <div className="container container-form text-center">
@@ -81,7 +104,7 @@ function CardUpdate() {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default CardUpdate;
+export default CardUpdate

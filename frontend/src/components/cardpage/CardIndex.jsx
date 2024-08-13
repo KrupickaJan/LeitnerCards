@@ -1,43 +1,39 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Link, useLocation } from "react-router-dom";
-import CardService from "../service/CardService";
-import * as Icon from "react-bootstrap-icons";
+import React, { useState, useEffect, useCallback } from "react"
+import { useParams, Link } from "react-router-dom"
+import CardService from "../service/CardService"
+import * as Icon from "react-bootstrap-icons"
 
 function CardIndex() {
-  const [cards, setCards] = useState([]);
-  const location = useLocation();
-  const packId = location.state.id;
-  const packName = location.state.name;
+  const [cards, setCards] = useState([])
+  const { packName, packId } = useParams()
 
   const fetchCards = useCallback(async () => {
     try {
-      const token = localStorage.getItem("token");
-      const response = await CardService.getCards(packId, token);
-      console.log("Fetched cards for pack:", packId, response.cards);
-      setCards(response.cards);
+      const response = await CardService.getCards(packId)
+      console.log("Fetched cards for pack:", packId, response.cards)
+      setCards(response.cards)
     } catch (error) {
-      console.error("Error fetching cards:", error);
+      console.error("Error fetching cards:", error)
     }
-  }, [packId]);
+  }, [packId])
 
   useEffect(() => {
-    fetchCards();
-  }, [fetchCards]);
+    fetchCards()
+  }, [fetchCards])
 
   const deleteCard = async (cardId) => {
     try {
       const confirmDelete = window.confirm(
         "Are you sure you want to delete this card?"
-      );
-      const token = localStorage.getItem("token");
+      )
       if (confirmDelete) {
-        await CardService.deleteCard(cardId, token);
-        fetchCards();
+        await CardService.deleteCard(cardId)
+        fetchCards()
       }
     } catch (error) {
-      console.error("Error deleting card:", error);
+      console.error("Error deleting card:", error)
     }
-  };
+  }
 
   return (
     <div className="container-sm  text-center">
@@ -48,8 +44,7 @@ function CardIndex() {
             <div colSpan={4} className="p-0 border-0">
               <Link
                 className="btn btn-dark border p-0 w-100"
-                to="/user/card/create"
-                state={{ id: packId, name: packName }}
+                to={`/user/card/create/${packName}/${packId}`}
               >
                 <div className="border p-0 d-flex flex-row border-0">
                   <div className="px-2 align-content-center">
@@ -88,15 +83,7 @@ function CardIndex() {
                       <li className="m-0 d-block">
                         <Link
                           className="dropdown-item py-2"
-                          to="/user/card/update"
-                          state={{
-                            cardId: card.id,
-                            packId: packId,
-                            question: card.question,
-                            answer: card.answer,
-                            cardValue: card.cardValue,
-                            packName: packName,
-                          }}
+                          to={`/user/card/update/${card.id}`}
                         >
                           Update
                         </Link>
@@ -119,7 +106,7 @@ function CardIndex() {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default CardIndex;
+export default CardIndex

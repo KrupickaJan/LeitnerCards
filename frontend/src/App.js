@@ -34,15 +34,14 @@ function AppRoutes() {
       <Route path="/profile" element={isAuthenticated ? <ProfilePage /> : <Navigate to="/login" />} />
       <Route path="/user/topic" element={isAuthenticated ? <TopicIndex /> : <Navigate to="/login" />} />
       <Route path="/user/topic/create" element={isAuthenticated ? <TopicCreate /> : <Navigate to="/login" />} />
-      <Route path="/user/topic/update" element={isAuthenticated ? <TopicUpdate /> : <Navigate to="/login" />} />
-      <Route path="/user/pack/create" element={isAuthenticated ? <PackCreate /> : <Navigate to="/login" />} />
-      <Route path="/user/pack/update" element={isAuthenticated ? <PackUpdate /> : <Navigate to="/login" />} />
-      <Route path="/user/card/index" element={isAuthenticated ? <CardIndex /> : <Navigate to="/login" />} />
-      <Route path="/user/card/create" element={isAuthenticated ? <CardCreate /> : <Navigate to="/login" />} />
-      <Route path="/user/card/update" element={isAuthenticated ? <CardUpdate /> : <Navigate to="/login" />} />
+      <Route path="/user/topic/update/:topicName/:topicId" element={isAuthenticated ? <TopicUpdate /> : <Navigate to="/login" />} />
+      <Route path="/user/pack/create/:topicId" element={isAuthenticated ? <PackCreate /> : <Navigate to="/login" />} />
+      <Route path="/user/pack/update/:packName/:packId" element={isAuthenticated ? <PackUpdate /> : <Navigate to="/login" />} />
+      <Route path="/user/card/index/:packName/:packId" element={isAuthenticated ? <CardIndex /> : <Navigate to="/login" />} />
+      <Route path="/user/card/create/:packName/:packId" element={isAuthenticated ? <CardCreate /> : <Navigate to="/login" />} />
+      <Route path="/user/card/update/:cardId" element={isAuthenticated ? <CardUpdate /> : <Navigate to="/login" />} />
       <Route path="/user/quiz/set" element={isAuthenticated ? <SetQuiz /> : <Navigate to="/login" />} />
       <Route path="/user/quiz" element={isAuthenticated ? <QuestionFirstQuiz /> : <Navigate to="/login" />} />
-      {/* <Route path="/user/quiz/answer-first" element={isAuthenticated ? <AnswerFirstQuiz /> : <Navigate to="/login" />} /> */}
       <Route path="/update-profile" element={isAuthenticated ? <UpdateProfile /> : <Navigate to="/login" />} />
 
       {isAuthenticated && isAdmin && (

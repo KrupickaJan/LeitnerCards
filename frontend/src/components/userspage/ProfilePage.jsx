@@ -1,23 +1,22 @@
-import React, { useState, useEffect } from "react";
-import UserService from "../service/UserService";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react"
+import UserService from "../service/UserService"
+import { Link } from "react-router-dom"
 
 function ProfilePage() {
-  const [profileInfo, setProfileInfo] = useState({});
+  const [profileInfo, setProfileInfo] = useState({})
 
   useEffect(() => {
-    fetchProfileInfo();
-  }, []);
+    fetchProfileInfo()
+  }, [])
 
   const fetchProfileInfo = async () => {
     try {
-      const token = localStorage.getItem("token"); // Retrieve the token from localStorage
-      const response = await UserService.getYourProfile(token);
-      setProfileInfo(response.userDto);
+      const response = await UserService.getYourProfile()
+      setProfileInfo(response.userDto)
     } catch (error) {
-      console.error("Error fetching profile information:", error);
+      console.error("Error fetching profile information:", error)
     }
-  };
+  }
 
   return (
     <div className="container-sm container-form max-w text-center">
@@ -32,7 +31,7 @@ function ProfilePage() {
         </Link>
       </div>
     </div>
-  );
+  )
 }
 
-export default ProfilePage;
+export default ProfilePage

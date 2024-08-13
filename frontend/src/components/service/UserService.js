@@ -7,7 +7,7 @@ class UserService {
     static async login(email, password) {
         try {
             const userDto = { email, password }
-            const response = await axios.post(`https://leitnercardsapi.onrender.com/auth/login`, { userDto })
+            const response = await axios.post(`http://localhost:8080/auth/login`, { userDto })
             return response.data;
         }
         catch (err) {
@@ -18,7 +18,7 @@ class UserService {
     static async register(userDto) {
         try {
 
-            const response = await axios.post(`https://leitnercardsapi.onrender.com/auth/register`, { userDto })
+            const response = await axios.post(`http://localhost:8080/auth/register`, { userDto })
             return response.data;
         }
         catch (err) {

@@ -1,37 +1,35 @@
-import React, { useState } from "react";
-import PackService from "../service/PackService";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState } from "react"
+import PackService from "../service/PackService"
+import { useNavigate, useParams } from "react-router-dom"
 
 function PackUpdate() {
-  const navigate = useNavigate();
-  const packId = useLocation().state.id;
-  const packName = useLocation().state.packName;
+  const navigate = useNavigate()
+  const { packName, packId } = useParams()
 
   const [formData, setFormData] = useState({
     name: packName,
-  });
+  })
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
+    const { name, value } = e.target
+    setFormData({ ...formData, [name]: value })
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const token = localStorage.getItem("token");
-      await PackService.updatePack(packId, formData, token);
+      await PackService.updatePack(packId, formData)
 
       setFormData({
         name: "",
-      });
-      alert("Pack updated successfully");
-      navigate("/user/topic");
+      })
+      alert("Pack updated successfully")
+      navigate("/user/topic")
     } catch (error) {
-      console.error("Error updating pack:", error);
-      alert("An error occurred while updating pack");
+      console.error("Error updating pack:", error)
+      alert("An error occurred while updating pack")
     }
-  };
+  }
 
   return (
     <div className="container container-form text-center">
@@ -58,7 +56,7 @@ function PackUpdate() {
         </button>
       </form>
     </div>
-  );
+  )
 }
 
-export default PackUpdate;
+export default PackUpdate
