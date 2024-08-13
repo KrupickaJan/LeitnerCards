@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class CardController {
     @Autowired
@@ -17,22 +19,27 @@ public class CardController {
     }
 
     @GetMapping("/user/card/getCards/{packId}")
-    public ResponseEntity<CardViewModel> getCards(@PathVariable Integer packId){
+    public ResponseEntity<CardViewModel> getCards(@PathVariable UUID packId){
         return ResponseEntity.ok(cardService.getCards(packId));
     }
 
+    @GetMapping("/user/card/getCard/{cardId}")
+    public ResponseEntity<CardViewModel> getCard(@PathVariable UUID cardId){
+        return ResponseEntity.ok(cardService.getCard(cardId));
+    }
+
     @PostMapping("/user/card/getCardsFromPacks")
-    public ResponseEntity<CardViewModel> getCardsFromPacks(@RequestBody Integer[] getCardsFromPacksRequest){
+    public ResponseEntity<CardViewModel> getCardsFromPacks(@RequestBody UUID[] getCardsFromPacksRequest){
         return ResponseEntity.ok(cardService.getCardsFromPacks(getCardsFromPacksRequest));
     }
 
     @DeleteMapping("/user/card/deleteCard/{cardId}")
-    public ResponseEntity<CardViewModel> deleteCard(@PathVariable Integer cardId){
+    public ResponseEntity<CardViewModel> deleteCard(@PathVariable UUID cardId){
         return ResponseEntity.ok(cardService.deleteCard(cardId));
     }
 
     @PutMapping("/user/card/updateCard/{cardId}")
-    public ResponseEntity<CardViewModel> updateCard(@PathVariable Integer cardId, @RequestBody CardViewModel updateCardRequest){
+    public ResponseEntity<CardViewModel> updateCard(@PathVariable UUID cardId, @RequestBody CardViewModel updateCardRequest){
         return ResponseEntity.ok(cardService.updateCard(cardId, updateCardRequest));
     }
 }

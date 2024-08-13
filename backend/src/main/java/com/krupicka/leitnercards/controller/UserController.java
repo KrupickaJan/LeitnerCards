@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class UserController {
     @Autowired
@@ -35,12 +37,12 @@ public class UserController {
     }
 
     @GetMapping("/admin/get-user/{userId}")
-    public ResponseEntity<UserViewModel> getUserById(@PathVariable Integer userId){
+    public ResponseEntity<UserViewModel> getUserById(@PathVariable UUID userId){
         return ResponseEntity.ok(userService.getUsersById(userId));
     }
 
     @PutMapping("/admin/update/{userId}")
-    public ResponseEntity<UserViewModel> updateUser(@PathVariable Integer userId, @RequestBody UserViewModel updatedUser){
+    public ResponseEntity<UserViewModel> updateUser(@PathVariable UUID userId, @RequestBody UserViewModel updatedUser){
         return ResponseEntity.ok(userService.updateUser(userId, updatedUser));
     }
 
@@ -56,7 +58,7 @@ public class UserController {
     }
 
     @DeleteMapping("/admin/delete/{userId}")
-    public ResponseEntity<UserViewModel> deleteUser(@PathVariable Integer userId){
+    public ResponseEntity<UserViewModel> deleteUser(@PathVariable UUID userId){
         return ResponseEntity.ok(userService.deleteUser(userId));
     }
 }

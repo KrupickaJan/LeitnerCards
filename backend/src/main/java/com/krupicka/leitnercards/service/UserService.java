@@ -20,6 +20,7 @@ import org.springframework.validation.BindingResult;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -139,7 +140,7 @@ public class UserService {
         return getAllUsersResponse;
     }
 
-    public UserViewModel getUsersById(Integer id) {
+    public UserViewModel getUsersById(UUID id) {
         UserViewModel userResponse = new UserViewModel();
         try {
             UserEntity usersById = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User Not found"));
@@ -154,7 +155,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserViewModel deleteUser(Integer userId) {
+    public UserViewModel deleteUser(UUID userId) {
         UserViewModel deleteUserResponse = new UserViewModel();
         try {
             Optional<UserEntity> userOptional = userRepository.findById(userId);
@@ -175,7 +176,7 @@ public class UserService {
         return deleteUserResponse;
     }
 
-    public UserViewModel updateUser(Integer userId, UserViewModel updatedUser) {
+    public UserViewModel updateUser(UUID userId, UserViewModel updatedUser) {
         UserViewModel updateUserResponse = new UserViewModel();
         try {
             Optional<UserEntity> userOptional = userRepository.findById(userId);

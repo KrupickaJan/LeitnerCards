@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class PackController {
     @Autowired
@@ -17,22 +19,22 @@ public class PackController {
     }
 
     @GetMapping("/user/pack/getPacks/{topicId}")
-    public ResponseEntity<PackViewModel> getPacks(@PathVariable Integer topicId){
+    public ResponseEntity<PackViewModel> getPacks(@PathVariable UUID topicId){
         return ResponseEntity.ok(packService.getPacks(topicId));
     }
 
     @DeleteMapping("/user/pack/delete/{packId}")
-    public ResponseEntity<PackViewModel> deletePack(@PathVariable Integer packId){
+    public ResponseEntity<PackViewModel> deletePack(@PathVariable UUID packId){
         return ResponseEntity.ok(packService.deletePack(packId));
     }
 
     @PutMapping("/user/pack/update/{packId}")
-    public ResponseEntity<PackViewModel> updatePack(@RequestBody PackViewModel updatePackRequest, @PathVariable Integer packId){
+    public ResponseEntity<PackViewModel> updatePack(@RequestBody PackViewModel updatePackRequest, @PathVariable UUID packId){
         return ResponseEntity.ok(packService.updatePack(updatePackRequest, packId));
     }
 
     @GetMapping("/user/pack/update-session/{packId}")
-    public ResponseEntity<PackViewModel> updateSession(@PathVariable Integer packId){
+    public ResponseEntity<PackViewModel> updateSession(@PathVariable UUID packId){
         return ResponseEntity.ok(packService.updateSession(packId));
     }
 }

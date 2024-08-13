@@ -34,7 +34,7 @@ public class PackService {
         PackViewModel packCreateResponse = new PackViewModel();
         try{
 
-            Integer topicId = packCreateRequest.getPackDto().getTopic().getId();
+            UUID topicId = packCreateRequest.getPackDto().getTopic().getId();
 
             Optional<TopicEntity> topicOptional = topicRepository.findById(topicId);
             if(topicOptional.isEmpty()){
@@ -62,7 +62,7 @@ public class PackService {
         return packCreateResponse;
     }
 
-    public PackViewModel getPacks(Integer topicId) {
+    public PackViewModel getPacks(UUID topicId) {
         PackViewModel getPacksResponse = new PackViewModel();
         getPacksResponse.setPacksList(new ArrayList<>());
         try{
@@ -99,7 +99,7 @@ public class PackService {
         return getPacksResponse;
     }
 
-    public PackViewModel deletePack(Integer packId){
+    public PackViewModel deletePack(UUID packId){
         PackViewModel deletePackResponse = new PackViewModel();
         try{
             Optional<PackEntity> packOptional = packRepository.findById(packId);
@@ -125,7 +125,7 @@ public class PackService {
         return deletePackResponse;
     }
 
-    public PackViewModel updatePack(PackViewModel updatePackRequest, Integer packId) {
+    public PackViewModel updatePack(PackViewModel updatePackRequest, UUID packId) {
         PackViewModel updatePackResponse = new PackViewModel();
         try{
             Optional<PackEntity> packOptional = packRepository.findById(packId);
@@ -152,7 +152,7 @@ public class PackService {
         return updatePackResponse;
     }
 
-    public PackViewModel updateSession(Integer packId) {
+    public PackViewModel updateSession(UUID packId) {
         PackViewModel updatePackResponse = new PackViewModel();
         try{
             Optional<PackEntity> packOptional = packRepository.findById(packId);
@@ -189,7 +189,7 @@ public class PackService {
         return updatePackResponse;
     }
 
-    private int findSmallestCardValueInPack(Integer packId){
+    private int findSmallestCardValueInPack(UUID packId){
         int minCardValue;
         List<CardEntity> cardEntities = cardRepository
                 .findAll()

@@ -5,12 +5,17 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 
+import java.util.UUID;
+
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class UserDto {
 
-    private Integer id;
+//    private Integer id;
+
+    private UUID id;
+
     @NotBlank(message = "Email is required.")
     @Size(min = 1, message = "Email is required.")
     @Email(message = "Email is not well formatted.",

@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static com.krupicka.leitnercards.service.AuthorizationUtils.*;
 
@@ -58,7 +55,32 @@ public class CardService {
         return cardCreateResponse;
     }
 
-    public CardViewModel getCards(Integer packId) {
+    public CardViewModel getCard(UUID cardId) {
+        CardViewModel getCardResponse = new CardViewModel();
+
+        try{
+            Optional<CardEntity> cardOptional = cardRepository.findById(cardId);
+            if(cardOptional.isEmpty()){
+                getCardResponse.setStatusCode(404);
+                getCardResponse.setMessage("No card found");
+            }
+            else if(!isUserOwnerOfCard(cardOptional.get())){
+                getCardResponse.setStatusCode(403);
+                getCardResponse.setMessage("User is not owner of this card");
+            }
+            else{
+                getCardResponse.setCardDto(cardMapper.cardEntityToDto(cardOptional.get()));
+                getCardResponse.setStatusCode(200);
+                getCardResponse.setMessage("Successful");
+            }
+        }  catch (Exception e){
+            getCardResponse.setStatusCode(500);
+            getCardResponse.setMessage("Error occurred while getting card: " + e.getMessage());
+        }
+        return getCardResponse;
+    }
+
+    public CardViewModel getCards(UUID packId) {
         CardViewModel getCardsResponse = new CardViewModel();
         getCardsResponse.setCards(new ArrayList<>());
         try{
@@ -93,11 +115,11 @@ public class CardService {
         return getCardsResponse;
     }
 
-    public CardViewModel getCardsFromPacks(Integer[] getCardsRequest) {
+    public CardViewModel getCardsFromPacks(UUID[] getCardsRequest) {
         CardViewModel getCardsResponse = new CardViewModel();
         getCardsResponse.setCards(new ArrayList<>());
         try{
-            for(Integer packId : getCardsRequest) {
+            for(UUID packId : getCardsRequest) {
                 Optional<PackEntity> packOptional = packRepository.findById(packId);
                 if (packOptional.isEmpty()) {
                     getCardsResponse.setStatusCode(404);
@@ -131,7 +153,7 @@ public class CardService {
         return getCardsResponse;
     }
 
-    public CardViewModel deleteCard(Integer cardId){
+    public CardViewModel deleteCard(UUID cardId){
         CardViewModel deleteCardResponse = new CardViewModel();
         try{
             Optional<CardEntity> cardOptional = cardRepository.findById(cardId);
@@ -156,7 +178,7 @@ public class CardService {
         return deleteCardResponse;
     }
 
-    public CardViewModel updateCard(Integer cardId, CardViewModel updateCardRequest) {
+    public CardViewModel updateCard(UUID cardId, CardViewModel updateCardRequest) {
         CardViewModel updateCardResponse = new CardViewModel();
         try{
             Optional<CardEntity> cardOptional = cardRepository.findById(cardId);

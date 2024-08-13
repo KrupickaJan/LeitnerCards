@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 public class TopicController {
     @Autowired
@@ -22,12 +24,12 @@ public class TopicController {
     }
 
     @DeleteMapping("/user/topic/delete/{topicId}")
-    public ResponseEntity<TopicViewModel> deleteTopicById(@PathVariable Integer topicId){
+    public ResponseEntity<TopicViewModel> deleteTopicById(@PathVariable UUID topicId){
         return ResponseEntity.ok(topicService.deleteTopic(topicId));
     }
 
     @PutMapping("/user/topic/update/{topicId}")
-    public ResponseEntity<TopicViewModel> updateTopic(@PathVariable Integer topicId, @RequestBody TopicViewModel topicUpdateRequest){
+    public ResponseEntity<TopicViewModel> updateTopic(@PathVariable UUID topicId, @RequestBody TopicViewModel topicUpdateRequest){
         return ResponseEntity.ok(topicService.updateTopic(topicId, topicUpdateRequest));
     }
 }

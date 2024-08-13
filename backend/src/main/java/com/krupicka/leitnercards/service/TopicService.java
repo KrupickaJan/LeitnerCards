@@ -17,10 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static com.krupicka.leitnercards.service.AuthorizationUtils.isUserOwnerOfTopic;
 
@@ -77,7 +74,7 @@ public class TopicService {
                 getUsersTopicsResponse.setMessage("No users found");
             }
             else{
-                Integer userId = userOptional.get().getId();
+                UUID userId = userOptional.get().getId();
                 List<TopicEntity> usersTopicEntities = topicRepository
                         .findAll()
                         .stream()
@@ -102,7 +99,7 @@ public class TopicService {
         return getUsersTopicsResponse;
     }
 
-    public TopicViewModel deleteTopic(Integer topicId){
+    public TopicViewModel deleteTopic(UUID topicId){
         TopicViewModel deleteTopicResponse = new TopicViewModel();
         try {
             Optional<TopicEntity> topicOptional = topicRepository.findById(topicId);
@@ -127,7 +124,7 @@ public class TopicService {
         return deleteTopicResponse;
     }
 
-    public TopicViewModel updateTopic(Integer topicId, TopicViewModel updateTopicRequest){
+    public TopicViewModel updateTopic(UUID topicId, TopicViewModel updateTopicRequest){
         TopicViewModel updateTopicResponse = new TopicViewModel();
         try{
             Optional<TopicEntity> topicOptional = topicRepository.findById(topicId);
@@ -154,7 +151,7 @@ public class TopicService {
         return updateTopicResponse;
     }
 
-    private List<PackDto> getTopicPacks(Integer topicId){
+    private List<PackDto> getTopicPacks(UUID topicId){
         List<PackDto> listOfPacks = new ArrayList<>();
         Optional<TopicEntity> topicOptional = topicRepository.findById(topicId);
         if(topicOptional.isPresent()){
