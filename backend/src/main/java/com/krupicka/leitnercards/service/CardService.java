@@ -171,7 +171,13 @@ public class CardService {
             else{
                 cardOptional.get().setQuestion(updateCardRequest.getCardDto().getQuestion());
                 cardOptional.get().setAnswer(updateCardRequest.getCardDto().getAnswer());
-                cardOptional.get().setCardValue(updateCardRequest.getCardDto().getCardValue());
+                if(updateCardRequest.getCardDto().getCardValue() < 0){
+                    cardOptional.get().setCardValue(1);
+                } else if (updateCardRequest.getCardDto().getCardValue() > 5) {
+                    cardOptional.get().setCardValue(5);
+                }else{
+                    cardOptional.get().setCardValue(updateCardRequest.getCardDto().getCardValue());
+                }
                 CardEntity savedEntity = cardRepository.save(cardOptional.get());
                 updateCardResponse.setCardDto(cardMapper.cardEntityToDto(savedEntity));
                 updateCardResponse.setStatusCode(200);
