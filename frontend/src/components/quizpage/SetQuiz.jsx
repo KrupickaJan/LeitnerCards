@@ -24,9 +24,10 @@ function SetQuiz() {
   }, [fetchTopics])
 
   const handleTopicChange = (event) => {
-    const selectedTopicId = Number(event.target.value)
+    const selectedTopicId = event.target.value
     const selectedTopic = topics.find((item) => item.id === selectedTopicId)
     setPacks(selectedTopic.packsList)
+    console.log(packs)
   }
 
   const handleQuizTypeChange = (event) => {
